@@ -14,6 +14,7 @@ public class Jatek {
     private int lepesek = 0;
     private boolean lampaVilagit = false;
     private boolean fut = true;
+    private boolean nyert = false;
 
     public Jatek(Helyszin kezdoHelyszin) {
         aktualisHelyszin = kezdoHelyszin;
@@ -35,10 +36,14 @@ public class Jatek {
             if (!scanner.hasNextLine()) {
                 break;
             }
-            vegrehajt(elemzo.elemez(scanner.nextLine()));
-            if (fut && lepesek >= MAX_LEPES) {
-                jatekVege("Elkéstél a vizsgáról! Elfogyott az időd. VESZTETTÉL.");
-            }
+            parancsotFeldolgoz(scanner.nextLine());
+        }
+    }
+
+    public void parancsotFeldolgoz(String sor) {
+        vegrehajt(elemzo.elemez(sor));
+        if (fut && lepesek >= MAX_LEPES) {
+            jatekVege("Elkéstél a vizsgáról! Elfogyott az időd. VESZTETTÉL.");
         }
     }
 
@@ -58,6 +63,22 @@ public class Jatek {
     // State minta: az állapotok ezen keresztül váltanak egymásra
     public void setAllapot(JatekosAllapot ujAllapot) {
         allapot = ujAllapot;
+    }
+
+    public JatekosAllapot getAllapot() {
+        return allapot;
+    }
+
+    public boolean isFut() {
+        return fut;
+    }
+
+    public boolean isNyert() {
+        return nyert;
+    }
+
+    public int getLepesek() {
+        return lepesek;
     }
 
     public Helyszin getAktualisHelyszin() {
@@ -143,6 +164,15 @@ public class Jatek {
         return null;
     }
 
+    public boolean vanNala(String targyNev) {
+        for (Targy targy : taska) {
+            if (targy.nevEgyezik(targyNev)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void targyElhasznal(Targy targy) {
         taska.remove(targy);
     }
@@ -163,6 +193,7 @@ public class Jatek {
             return;
         }
         zartHelyszin.setZarva(false);
+        nyert = true;
         jatekVege("A kulcs elfordul a zárban, kinyílik az ajtó: " + zartHelyszin.getNev()
                 + ". Az utolsó pillanatban beesel a vizsgára. NYERTÉL!");
     }
