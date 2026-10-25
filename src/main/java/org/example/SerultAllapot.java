@@ -39,7 +39,11 @@ public class SerultAllapot implements JatekosAllapot {
         }
         System.out.println("Sántikálva haladsz, ez " + LEPES_KOLTSEG + " lépésbe került.");
         Helyszin h = j.getAktualisHelyszin();
-        if (h.isSotet() && !j.isLampaVilagit()) {
+        if (h.getEllenseg() != null) {
+            j.helyszinKiir();
+            // State minta: sérülten kezdünk harcba
+            j.setAllapot(new HarcAllapot(h.getEllenseg(), true));
+        } else if (h.isSotet() && !j.isLampaVilagit()) {
             j.sotetKiir();
             // State minta: sötétben is sérültek maradunk
             j.setAllapot(new SotetbenAllapot(true));

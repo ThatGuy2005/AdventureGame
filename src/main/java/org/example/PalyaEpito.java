@@ -39,7 +39,7 @@ public class PalyaEpito {
         pince.targyatLerak(new Targy("kulcs", "a vizsgaterem kulcsa"));
 
         lepcsohaz.setEllenseg(new Ellenseg("Bodri",
-                "Bodri, a gondnok harapós kutyája morogva elállja az utad!", 2));
+                "Bodri, a gondnok harapós kutyája morogva elállja az utad!", 3));
 
         return eloadoterem;
     }

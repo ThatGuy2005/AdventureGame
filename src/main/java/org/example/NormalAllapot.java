@@ -37,7 +37,11 @@ public class NormalAllapot implements JatekosAllapot {
             return;
         }
         Helyszin h = j.getAktualisHelyszin();
-        if (h.isSotet() && !j.isLampaVilagit()) {
+        if (h.getEllenseg() != null) {
+            j.helyszinKiir();
+            // State minta: ellenség állja el az utat, harc állapotba váltunk
+            j.setAllapot(new HarcAllapot(h.getEllenseg(), false));
+        } else if (h.isSotet() && !j.isLampaVilagit()) {
             j.sotetKiir();
             // State minta: sötét helyre lámpa nélkül érve sötétben állapotba váltunk
             j.setAllapot(new SotetbenAllapot(false));

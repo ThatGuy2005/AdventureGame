@@ -48,7 +48,11 @@ public class SotetbenAllapot implements JatekosAllapot {
         }
         System.out.println("Tapogatózva elindulsz.");
         Helyszin h = j.getAktualisHelyszin();
-        if (h.isSotet()) {
+        if (h.getEllenseg() != null) {
+            j.helyszinKiir();
+            // State minta: a sötétből egyenesen harcba kerülünk
+            j.setAllapot(new HarcAllapot(h.getEllenseg(), serult));
+        } else if (h.isSotet()) {
             j.sotetKiir();
         } else {
             // State minta: világos helyre érve kilépünk a sötétben állapotból

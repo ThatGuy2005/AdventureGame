@@ -7,6 +7,7 @@ public class Jatek {
     private static final int MAX_LEPES = 30;
 
     private Helyszin aktualisHelyszin;
+    private Helyszin elozoHelyszin;
     private JatekosAllapot allapot;
     private final ArrayList<Targy> taska = new ArrayList<>();
     private final ParancsElemzo elemzo = new ParancsElemzo();
@@ -81,9 +82,17 @@ public class Jatek {
             System.out.println("Ez az ajtó zárva van. Kulcs kell hozzá!");
             return false;
         }
+        elozoHelyszin = aktualisHelyszin;
         aktualisHelyszin = cel;
         lepesek += koltseg;
         return true;
+    }
+
+    public void visszamenekul(int koltseg) {
+        Helyszin honnan = aktualisHelyszin;
+        aktualisHelyszin = elozoHelyszin;
+        elozoHelyszin = honnan;
+        lepesek += koltseg;
     }
 
     public void helyszinKiir() {
