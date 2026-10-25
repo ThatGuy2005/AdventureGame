@@ -38,7 +38,14 @@ public class SerultAllapot implements JatekosAllapot {
             return;
         }
         System.out.println("Sántikálva haladsz, ez " + LEPES_KOLTSEG + " lépésbe került.");
-        j.helyszinKiir();
+        Helyszin h = j.getAktualisHelyszin();
+        if (h.isSotet() && !j.isLampaVilagit()) {
+            j.sotetKiir();
+            // State minta: sötétben is sérültek maradunk
+            j.setAllapot(new SotetbenAllapot(true));
+        } else {
+            j.helyszinKiir();
+        }
     }
 
     private void hasznald(Jatek j, String targyNev) {

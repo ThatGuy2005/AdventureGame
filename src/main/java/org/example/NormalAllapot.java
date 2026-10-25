@@ -33,7 +33,15 @@ public class NormalAllapot implements JatekosAllapot {
     }
 
     private void menj(Jatek j, String irany) {
-        if (j.mozog(irany, 1)) {
+        if (!j.mozog(irany, 1)) {
+            return;
+        }
+        Helyszin h = j.getAktualisHelyszin();
+        if (h.isSotet() && !j.isLampaVilagit()) {
+            j.sotetKiir();
+            // State minta: sötét helyre lámpa nélkül érve sötétben állapotba váltunk
+            j.setAllapot(new SotetbenAllapot(false));
+        } else {
             j.helyszinKiir();
         }
     }

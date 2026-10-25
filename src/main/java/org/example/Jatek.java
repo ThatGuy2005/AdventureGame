@@ -90,6 +90,11 @@ public class Jatek {
         System.out.println(aktualisHelyszin.teljesLeiras());
     }
 
+    public void sotetKiir() {
+        System.out.println("--- " + aktualisHelyszin.getNev() + " ---");
+        System.out.println("Koromsötét van. Nem látsz se tárgyakat, se kijáratokat.");
+    }
+
     public void targyFelvesz(String targyNev) {
         if (targyNev == null) {
             System.out.println("Mit vegyek fel? Például: vedd fel lampa");
