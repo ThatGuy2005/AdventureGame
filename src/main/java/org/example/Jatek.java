@@ -129,6 +129,10 @@ public class Jatek {
         return null;
     }
 
+    public void targyElhasznal(Targy targy) {
+        taska.remove(targy);
+    }
+
     public void lampaFelkapcsol() {
         if (lampaVilagit) {
             System.out.println("A lámpa már világít.");
